@@ -7,4 +7,4 @@ def bubble a
     a
 end
 
-print bubble([5,3,4,21,0,1])
+p bubble([5,3,4,21,0,1])
