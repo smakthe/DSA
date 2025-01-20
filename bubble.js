@@ -1,15 +1,14 @@
-arr = [7,5,3,1]
-console.log(arr)
+a = [7,5,3,1]
+console.log(a)
 
-for(i=0;i<arr.length;i++){
-    for(j=0;j<(arr.length-i-1);j++){
-        if(arr[j]>arr[j+1]){
-            temp = arr[j];
-            arr[j] = arr[j+1];
-            arr[j+1] = temp;
+for(i=0;i<a.length;i++){
+    for(j=0;j<(a.length-i-1);j++){
+        if(a[j]>a[j+1]){
+            temp = a[j];
+            a[j] = a[j+1];
+            a[j+1] = temp;
         }
-        console.log(arr)
     }
 }
 
-console.log(arr)
+console.log(a)
