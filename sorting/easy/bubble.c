@@ -24,7 +24,7 @@ void print(int *a){
 
 void main(){
     int *arr = (int *)malloc(LEN*sizeof(int));
-    memcpy(arr, (int[LEN]){2, ,1, 0, 54, -72, 8, 11, -1}, LEN * sizeof(int));
+    memcpy(arr, (int[LEN]){2,1,0,54,-72,8,11,-1}, LEN * sizeof(int));
     printf("Unsorted Array: ");
     print(arr);
     bubble(arr);
