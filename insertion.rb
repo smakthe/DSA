@@ -1,4 +1,4 @@
-def insertion(a)
+def insertion a
   for i in 1...a.length
     key = a[i]
     j = i-1
@@ -11,4 +11,4 @@ def insertion(a)
   a
 end
 
-p insertion([2,1,-3,4,17,-5,37,8])
+p insertion [2,1,-3,4,17,-5,37,8]
