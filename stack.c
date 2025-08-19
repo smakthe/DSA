@@ -3,54 +3,99 @@
 
 typedef struct Node
 {
-  int data;
-  struct Node *next;
+    int data;
+    struct Node *next;
 } Node;
 
 typedef struct Stack
 {
-  struct Node *top;
-  struct Node *bottom;
+    struct Node *top;
 } Stack;
 
-void push (Stack *s, int data)
+int isEmpty(Stack *s)
 {
-  Node *current = (Node *) malloc (sizeof (Node));
-  current->data = data;
-  current->next = NULL;
-  if (s->top == NULL)
-	{
-	  s->top = current;
-	  s->bottom = current;
-	}
-  else
-	{
-	  s->top->next = current;
-	  s->top = current;
-	}
+    return s->top == NULL;
 }
 
-void pop (Stack *s)
+void push(Stack *s, int data)
 {
-  Node *temp = s->bottom;
-  while (temp->next->next != NULL)
-	{
-	  temp = temp->next;
-	}
-   s->top = temp;
-   temp->next = NULL;
-   temp = NULL;
-   free (temp);
+    Node *newNode = (Node *)malloc(sizeof(Node));
+    if (newNode == NULL)
+    {
+        puts("Error: Memory allocation failed");
+        return;
+    }
+    
+    newNode->data = data;
+    newNode->next = s->top;
+    s->top = newNode;
 }
 
-void printStack (Stack *s)
+int pop(Stack *s)
 {
-  printf ("Current Stack: [ ");
-  Node *current = s->bottom;
-  while (current != NULL)
-	{
-	  printf ("%i ", current->data);
-	  current = current->next;
-	}
-  puts ("]");
+    if (isEmpty(s))
+    {
+        puts("Error: Cannot pop from empty stack");
+        return -1;
+    }
+    
+    Node *temp = s->top;
+    int data = temp->data;
+    s->top = s->top->next;
+    free(temp);    
+    return data;
+}
+
+void printStack(Stack *s)
+{
+    printf("Current Stack (top to bottom): [ ");
+    Node *current = s->top;
+    while (current != NULL)
+    {
+        printf("%d ", current->data);
+        current = current->next;
+    }
+    printf("]\n");
+}
+
+void freeStack(Stack *s)
+{
+    while (!isEmpty(s))
+    {
+        pop(s);
+    }
+}
+
+void main()
+{
+    Stack myStack;
+    myStack.top = NULL;
+    printStack(&myStack);
+    
+    puts("Pushing elements:");
+    push(&myStack, 10);
+    printStack(&myStack);
+    push(&myStack, 20);
+    printStack(&myStack);
+    push(&myStack, 30);
+    printStack(&myStack);
+    
+    puts("Popping elements:");
+    pop(&myStack);
+    printStack(&myStack);
+    pop(&myStack);
+    printStack(&myStack);
+    pop(&myStack);
+    printStack(&myStack);
+    
+    puts("Trying to pop from empty stack:");
+    pop(&myStack);
+    
+    puts("Pushing more elements:");
+    push(&myStack, 100);
+    push(&myStack, 200);
+    printStack(&myStack);
+    
+    puts("Freeing remaining stack:");
+    freeStack(&myStack);
 }
